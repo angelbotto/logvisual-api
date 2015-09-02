@@ -6,7 +6,6 @@ class User
   include Mongoid::Timestamps # adds created_at and updated_at fields
   include BCrypt
 
-  field :name,          type: String
   field :email,         type: String
   field :password_hash, type: String
   field :verify,        type: Boolean, default: false
@@ -30,7 +29,6 @@ class User
   #
   def self.signup(user = {})
     user = User.new(
-      name: user[:name] || nil,
       email: user[:email],
       password: user[:password]
     )
@@ -48,7 +46,7 @@ class User
   ##
   # Validate token
   def self.validate_token(token)
-    user = User.where(token: token).first
+    user = User.where(token: token, verify: true).first
     user ? user : false
   end
 
