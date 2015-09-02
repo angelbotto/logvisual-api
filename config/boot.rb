@@ -12,6 +12,9 @@ Dotenv.load
 
 if Padrino.env == :development
   require 'better_errors'
+  require 'rubocop/rake_task'
+
+  RuboCop::RakeTask.new
   Padrino::Application.use BetterErrors::Middleware
   BetterErrors.application_root = PADRINO_ROOT
   BetterErrors.logger = Padrino.logger
