@@ -17,7 +17,7 @@ Logvisual::V1.controllers :task do
   end
 
   post :list do
-    @tasks = Task.where(user: @user).limit(10)
+    @tasks = Task.where(user: @user).desc(:created_at).limit(10)
     render :tasks
   end
 end
